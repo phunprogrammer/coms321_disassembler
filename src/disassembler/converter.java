@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class converter {
-    static List<Integer> BinaryToInt(String filename) throws IOException {
+    static List<Integer> BinaryToInt(String filename, Boolean print) throws IOException {
         FileInputStream file;
 
         try {
@@ -26,7 +26,9 @@ public class converter {
             int bigEndian = binaryStream.readInt();
 
             bigEndianList.add(bigEndian);
-            //System.out.println(String.format("%32s", Integer.toBinaryString(bigEndian)).replace(' ', '0'));
+
+            if(print)
+                System.out.println(String.format("%32s", Integer.toBinaryString(bigEndian)).replace(' ', '0'));
         }
 
         binaryStream.close();
