@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class converter {
+public class Converter {
     static List<Integer> BinaryToInt(String filename, Boolean print) throws IOException {
         FileInputStream file;
 
