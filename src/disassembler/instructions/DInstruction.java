@@ -15,6 +15,6 @@ public class DInstruction extends Instruction{
     }
 
     public String toString() {
-        return String.format("%s X%d, [X%d, #%d]", Rt, Rn, DTAddress);
+        return String.format("%s X%d, [X%d, #%d]", opName, Rt, Rn, DTAddress);
     }
 }

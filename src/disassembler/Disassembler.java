@@ -48,8 +48,8 @@ public class Disassembler {
 	
 	
 	
-	public Disassembler(List<Integer> binaryInstructions) {
-		this.binaryInstructions = binaryInstructions;
+	public Disassembler(String fileName) throws IOException {
+		this.binaryInstructions = Converter.BinaryToInt(fileName, false);
 		instructions = new ArrayList<>();
 	}
 	
@@ -112,6 +112,7 @@ public class Disassembler {
 	}
 	
 	public void disassembleInstructions() throws IOException {
+		instructions.clear();
 		for (int curIndex = 0; curIndex < binaryInstructions.size(); curIndex++) {
 			int binI = binaryInstructions.get(curIndex);
 			long binL = (long)(binI) & 0x00000000ffffffffL;
@@ -123,7 +124,7 @@ public class Disassembler {
 	public void PrintInstructions() {
 		for (int curIndex = 0; curIndex < instructions.size(); curIndex++) {
 			Instruction curInstruction = instructions.get(curIndex);
-			System.out.println(String.format("%d:%c %s", curInstruction.getLine(), " ", curInstruction.toString()));
+			System.out.println(String.format("%d:%c %s", curInstruction.getLine(), ' ', curInstruction.toString()));
 		}
 	}
 }
