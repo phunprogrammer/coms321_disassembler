@@ -29,7 +29,7 @@ public class CBInstruction extends Instruction {
     public CBInstruction(int binary, String name, int line) {
         super(binary, name, line);
 
-        this.condBRAddress = (binary << 8) >> 12;
+        this.condBRAddress = (binary << 8) >> 13;
         this.Rt = (binary << 27) >> 24;
     }
 

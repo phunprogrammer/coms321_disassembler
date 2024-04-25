@@ -85,9 +85,9 @@ public class Disassembler {
 		} else if (opCode <= SUBI_RANGE) {
 			instructions.add(new ImmInstruction(binI, "SUBI", line));
 		} else if (opCode <= LSR_RANGE) {
-			Operations.lsr(binI);
+			instructions.add(new ImmInstruction(binI, "LSR", line));
 		} else if (opCode <= LSL_RANGE) {
-			Operations.lsl(binI);
+			instructions.add(new ImmInstruction(binI, "LSL", line));
 		} else if (opCode <= BRANCHREGISTER_RANGE) {
 			instructions.add(new RInstruction(binI, "BR", line));
 		} else if (opCode <= SUBS_RANGE) {
@@ -99,13 +99,13 @@ public class Disassembler {
 		} else if (opCode <= LDUR_RANGE) {
 			instructions.add(new DInstruction(binI, "LDUR", line));
 		} else if (opCode <= PRNL_RANGE) {
-			Operations.prnl(binI);
+			instructions.add(new RInstruction(binI, "PRNL", line));
 		} else if (opCode <= PRNT_RANGE) {
-			Operations.prnt(binI);
+			instructions.add(new RInstruction(binI, "PRNT", line));
 		} else if (opCode <= DUMP_RANGE) {
-			Operations.dump(binI);
+			instructions.add(new RInstruction(binI, "DUMP", line));
 		} else if (opCode <= HALT_RANGE) {
-			Operations.halt(binI);
+			instructions.add(new RInstruction(binI, "HALT", line));
 		} 
 	}
 	

@@ -9,7 +9,7 @@ public class ImmInstruction extends Instruction{
 		super(binary, opName, line);
 		this.opCode = binary >> 21; 
 		Rd = (binary << 27) >> 27;
-		Rn = (binary << 21) >> 27;
+		Rn = (binary << 22) >> 27;
 		ALUImm = (binary << 10) >> 21;
 	}
 	
