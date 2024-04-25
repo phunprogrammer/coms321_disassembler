@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import disassembler.instructions.BInstruction;
+import disassembler.instructions.CBInstruction;
+import disassembler.instructions.DInstruction;
 import disassembler.instructions.ImmInstruction;
 import disassembler.instructions.Instruction;
 import disassembler.instructions.RInstruction;
@@ -55,7 +57,7 @@ public class Disassembler {
 		if (opCode <= BRANCH_RANGE) {
 			instructions.add(new BInstruction(binI, "B", line));
 		} else if (opCode <= BRANCHCOND_RANGE) {
-			Operations.branchCond(binI);
+			instructions.add(new CBInstruction(binI, "B", line));
 		} else if (opCode <= ORRI_RANGE) {
 			instructions.add(new ImmInstruction(binI, "ORRI", line));
 		} else if (opCode <= EORI_RANGE) {
@@ -75,9 +77,9 @@ public class Disassembler {
 		} else if (opCode <= ORR_RANGE) {
 			instructions.add(new RInstruction(binI, "ORR", line));
 		} else if (opCode <= CBZ_RANGE) {
-			Operations.cbz(binI);
+			instructions.add(new CBInstruction(binI, "CBZ", line));
 		} else if (opCode <= CBNZ_RANGE) {
-			Operations.cbnz(binI);
+			instructions.add(new CBInstruction(binI, "CBNZ", line));
 		} else if (opCode <= EOR_RANGE) {
 			instructions.add(new RInstruction(binI, "EOR", line));
 		} else if (opCode <= SUB_RANGE) {
@@ -120,7 +122,8 @@ public class Disassembler {
 
 	public void PrintInstructions() {
 		for (int curIndex = 0; curIndex < instructions.size(); curIndex++) {
-			System.out.println(instructions.get(curIndex));
+			Instruction curInstruction = instructions.get(curIndex);
+			System.out.println(String.format("%d:%c %s", curInstruction.getLine(), " ", curInstruction.toString()));
 		}
 	}
 }

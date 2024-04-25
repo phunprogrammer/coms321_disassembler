@@ -13,4 +13,9 @@ public abstract class Instruction {
     }
 
     public abstract String toString();
+    
+    public int getLine() {
+    	return line;
+    }
+    
 }
