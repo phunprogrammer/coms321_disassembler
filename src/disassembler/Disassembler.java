@@ -48,27 +48,27 @@ public class Disassembler {
 		instructions = new ArrayList<>();
 	}
 	
-	private void determineOp(int opCode, int binI) {
+	private void determineOp(int opCode, int binI, int line) {
 		if (opCode <= BRANCH_RANGE) {
 			Operations.branch(binI);
 		} else if (opCode <= BRANCHCOND_RANGE) {
 			Operations.branchCond(binI);
 		} else if (opCode <= ORRI_RANGE) {
-			instructions.add(new ImmInstruction(binI, "ORRI"));
+			instructions.add(new ImmInstruction(binI, "ORRI", line));
 		} else if (opCode <= EORI_RANGE) {
-			instructions.add(new ImmInstruction(binI, "EORI"));
+			instructions.add(new ImmInstruction(binI, "EORI", line));
 		} else if (opCode <= AND_RANGE) {
-			instructions.add(new RInstruction(binI, "AND"));
+			instructions.add(new RInstruction(binI, "AND", line));
 		} else if (opCode <= ADD_RANGE) {
-			instructions.add(new RInstruction(binI, "ADD"));
+			instructions.add(new RInstruction(binI, "ADD", line));
 		} else if (opCode <= ADDI_RANGE) {
-			instructions.add(new ImmInstruction(binI, "ADDI"));
+			instructions.add(new ImmInstruction(binI, "ADDI", line));
 		} else if (opCode <= ANDI_RANGE) {
-			instructions.add(new ImmInstruction(binI, "ANDI"));
+			instructions.add(new ImmInstruction(binI, "ANDI", line));
 		} else if (opCode <= BRANCHLINK_RANGE) {
 			Operations.branchLink(binI);
 		} else if (opCode <= MUL_RANGE) {
-			instructions.add(new RInstruction(binI, "MUL"));
+			instructions.add(new RInstruction(binI, "MUL", line));
 		} else if (opCode <= ORR_RANGE) {
 			Operations.orr(binI);
 		} else if (opCode <= CBZ_RANGE) {
@@ -76,11 +76,11 @@ public class Disassembler {
 		} else if (opCode <= CBNZ_RANGE) {
 			Operations.cbnz(binI);
 		} else if (opCode <= EOR_RANGE) {
-			instructions.add(new RInstruction(binI, "EOR"));
+			instructions.add(new RInstruction(binI, "EOR", line));
 		} else if (opCode <= SUB_RANGE) {
-			instructions.add(new RInstruction(binI, "SUB"));
+			instructions.add(new RInstruction(binI, "SUB", line));
 		} else if (opCode <= SUBI_RANGE) {
-			instructions.add(new ImmInstruction(binI, "SUBI"));
+			instructions.add(new ImmInstruction(binI, "SUBI", line));
 		} else if (opCode <= LSR_RANGE) {
 			Operations.lsr(binI);
 		} else if (opCode <= LSL_RANGE) {
@@ -88,9 +88,9 @@ public class Disassembler {
 		} else if (opCode <= BRANCHREGISTER_RANGE) {
 			Operations.branchRegister(binI);
 		} else if (opCode <= SUBS_RANGE) {
-			instructions.add(new RInstruction(binI, "SUBS"));
+			instructions.add(new RInstruction(binI, "SUBS", line));
 		} else if (opCode <= SUBIS_RANGE) {
-			instructions.add(new ImmInstruction(binI, "SUBIS"));
+			instructions.add(new ImmInstruction(binI, "SUBIS", line));
 		} else if (opCode <= PRNL_RANGE) {
 			Operations.prnl(binI);
 		} else if (opCode <= PRNT_RANGE) {
@@ -107,7 +107,7 @@ public class Disassembler {
 			int binI = binaryInstructions.get(curIndex);
 			long binL = (long)(binI) & 0x00000000ffffffffL;
 			int opCode = (int)(binL >> 21);
-			determineOp(opCode, (int)binI);
+			determineOp(opCode, (int)binI, curIndex);
 		}
 	}
 
