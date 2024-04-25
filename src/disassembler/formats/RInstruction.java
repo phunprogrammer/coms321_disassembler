@@ -1,6 +1,6 @@
 package disassembler.formats;
 
-public class RFormat extends Instruction {
+public class RInstruction extends Instruction {
     String opName;
     int opCode;
     int Rm;
@@ -8,7 +8,7 @@ public class RFormat extends Instruction {
     int Rn;
     int Rd;
 
-    public RFormat(int binary, String name) {
+    public RInstruction(int binary, String name) {
         this.binary = binary;
         opName = name;
         opCode = binary >> 21;
