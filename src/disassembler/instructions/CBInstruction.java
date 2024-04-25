@@ -30,14 +30,14 @@ public class CBInstruction extends Instruction {
         super(binary, name, line);
 
         this.condBRAddress = (binary << 8) >> 13;
-        this.Rt = (binary << 27) >> 24;
+        this.Rt = (binary << 27) >>> 27;
     }
 
     public String toString() {
         String out = String.format("%s.%s %d", opName, COND_STRINGS.get(Rt), line + condBRAddress);
 
         if(opName.equals("CBZ") || opName.equals("CBNZ"))
-            out = String.format("%s X%d %d", opName, Rt, line + condBRAddress);
+            out = String.format("%s X%d, %d", opName, Rt, line + condBRAddress);
         
         return out;
     }
