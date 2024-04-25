@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import disassembler.instructions.BInstruction;
+import disassembler.instructions.DInstruction;
 import disassembler.instructions.ImmInstruction;
 import disassembler.instructions.Instruction;
 import disassembler.instructions.RInstruction;
