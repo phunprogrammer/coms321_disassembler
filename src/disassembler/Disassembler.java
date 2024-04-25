@@ -7,7 +7,7 @@ import disassembler.formats.RFormat;
 
 public class Disassembler {
 	
-	private List<Integer> binaryInstructions;
+	private String fileName;
 	private List<Instruction> instructions;
 	
 	// CONSTANT OPCODE RANGES
@@ -37,11 +37,8 @@ public class Disassembler {
 	private static final int DUMP_RANGE = 2046;
 	private static final int HALT_RANGE = 2047;
 	
-	
-	
-	
-	public Disassembler(List<Integer> binaryInstructions) {
-		this.binaryInstructions = binaryInstructions;
+	public Disassembler(String fileName) {
+		this.fileName = fileName;
 		instructions = new ArrayList<>();
 	}
 	
@@ -102,7 +99,8 @@ public class Disassembler {
 		} 
 	}
 	
-	public void disassembleInstructions() throws IOException {
+	public void disassembleInstructions() throws IOException{
+		List<Integer> binaryInstructions = Converter.BinaryToInt(fileName, false);
 		for (int curIndex = 0; curIndex < binaryInstructions.size(); curIndex++) {
 			int binI = binaryInstructions.get(curIndex);
 			long binL = (long)(binI) & 0x00000000ffffffffL;
