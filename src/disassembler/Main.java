@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		Disassembler dis = new Disassembler("321assignment1.txt.machine");
+		Disassembler dis = new Disassembler(args[0]);
 		dis.disassembleInstructions();
 		dis.printInstructions();
 	}
