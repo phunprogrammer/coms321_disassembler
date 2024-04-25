@@ -2,8 +2,10 @@ package disassembler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import disassembler.formats.ImmInstruction;
 import disassembler.formats.Instruction;
-import disassembler.formats.RFormat;
+import disassembler.formats.RInstruction;
 
 public class Disassembler {
 	
@@ -48,18 +50,18 @@ public class Disassembler {
 		} else if (opCode <= BRANCHCOND_RANGE) {
 			Operations.branchCond(binI);
 		} else if (opCode <= ORRI_RANGE) {
-			Operations.orrI(binI);
+			instructions.add(new ImmInstruction(binI, "ORRI"));
 		} else if (opCode <= EORI_RANGE) {
-			Operations.eorI(binI);
+			instructions.add(new ImmInstruction(binI, "EORI"));
 		} else if (opCode <= AND_RANGE) {
 			Operations.and(binI);
 		} else if (opCode <= ADD_RANGE) {
 			Operations.add(binI);
-			instructions.add((Instruction)(new RFormat(binI, "ADD")));
+			instructions.add((Instruction)(new RInstruction(binI, "ADD")));
 		} else if (opCode <= ADDI_RANGE) {
-			Operations.addI(binI);
+			instructions.add(new ImmInstruction(binI, "ADDI"));
 		} else if (opCode <= ANDI_RANGE) {
-			Operations.andI(binI);
+			instructions.add(new ImmInstruction(binI, "ANDI"));
 		} else if (opCode <= BRANCHLINK_RANGE) {
 			Operations.branchLink(binI);
 		} else if (opCode <= MUL_RANGE) {
@@ -75,9 +77,7 @@ public class Disassembler {
 		} else if (opCode <= SUB_RANGE) {
 			Operations.sub(binI);
 		} else if (opCode <= SUBI_RANGE) {
-			Operations.subI(binI);
-		} else if (opCode <= EOR_RANGE) {
-			Operations.eor(binI);
+			instructions.add(new ImmInstruction(binI, "SUBI"));
 		} else if (opCode <= LSR_RANGE) {
 			Operations.lsr(binI);
 		} else if (opCode <= LSL_RANGE) {
@@ -87,7 +87,7 @@ public class Disassembler {
 		} else if (opCode <= SUBS_RANGE) {
 			Operations.subs(binI);
 		} else if (opCode <= SUBIS_RANGE) {
-			Operations.subIs(binI);
+			instructions.add(new ImmInstruction(binI, "SUBIS"));
 		} else if (opCode <= PRNL_RANGE) {
 			Operations.prnl(binI);
 		} else if (opCode <= PRNT_RANGE) {

@@ -1,12 +1,10 @@
 package disassembler.formats;
 
 public class RInstruction extends Instruction {
-    String opName;
-    int opCode;
-    int Rm;
-    int shamt;
-    int Rn;
-    int Rd;
+    private int Rm;
+    private int shamt;
+    private int Rn;
+    private int Rd;
 
     public RInstruction(int binary, String name) {
         this.binary = binary;

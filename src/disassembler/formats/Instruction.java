@@ -1,7 +1,11 @@
 package disassembler.formats;
 
 public abstract class Instruction {
-    int binary;
+	protected String opName;
+	protected int opCode;
+	protected int binary;
+	
 
     public abstract String toString();
+    
 }
