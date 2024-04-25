@@ -2,13 +2,14 @@ package disassembler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import disassembler.formats.Instruction;
-import disassembler.formats.RFormat;
+import disassembler.instructions.Instruction;
+import disassembler.instructions.RInstruction;
 
 public class Disassembler {
 	
-	private String fileName;
+	private List<Integer> binaryInstructions;
 	private List<Instruction> instructions;
+
 	
 	// CONSTANT OPCODE RANGES
 	private static final int BRANCH_RANGE = 191;
@@ -37,8 +38,11 @@ public class Disassembler {
 	private static final int DUMP_RANGE = 2046;
 	private static final int HALT_RANGE = 2047;
 	
-	public Disassembler(String fileName) {
-		this.fileName = fileName;
+	
+	
+	
+	public Disassembler(List<Integer> binaryInstructions) {
+		this.binaryInstructions = binaryInstructions;
 		instructions = new ArrayList<>();
 	}
 	
@@ -52,10 +56,9 @@ public class Disassembler {
 		} else if (opCode <= EORI_RANGE) {
 			Operations.eorI(binI);
 		} else if (opCode <= AND_RANGE) {
-			Operations.and(binI);
+			instructions.add(new RInstruction(binI, "AND"));
 		} else if (opCode <= ADD_RANGE) {
-			Operations.add(binI);
-			instructions.add((Instruction)(new RFormat(binI, "ADD")));
+			instructions.add(new RInstruction(binI, "ADD"));
 		} else if (opCode <= ADDI_RANGE) {
 			Operations.addI(binI);
 		} else if (opCode <= ANDI_RANGE) {
@@ -63,7 +66,7 @@ public class Disassembler {
 		} else if (opCode <= BRANCHLINK_RANGE) {
 			Operations.branchLink(binI);
 		} else if (opCode <= MUL_RANGE) {
-			Operations.mul(binI);
+			instructions.add(new RInstruction(binI, "MUL"));
 		} else if (opCode <= ORR_RANGE) {
 			Operations.orr(binI);
 		} else if (opCode <= CBZ_RANGE) {
@@ -71,13 +74,11 @@ public class Disassembler {
 		} else if (opCode <= CBNZ_RANGE) {
 			Operations.cbnz(binI);
 		} else if (opCode <= EOR_RANGE) {
-			Operations.eor(binI);
+			instructions.add(new RInstruction(binI, "EOR"));
 		} else if (opCode <= SUB_RANGE) {
-			Operations.sub(binI);
+			instructions.add(new RInstruction(binI, "SUB"));
 		} else if (opCode <= SUBI_RANGE) {
 			Operations.subI(binI);
-		} else if (opCode <= EOR_RANGE) {
-			Operations.eor(binI);
 		} else if (opCode <= LSR_RANGE) {
 			Operations.lsr(binI);
 		} else if (opCode <= LSL_RANGE) {
@@ -85,7 +86,7 @@ public class Disassembler {
 		} else if (opCode <= BRANCHREGISTER_RANGE) {
 			Operations.branchRegister(binI);
 		} else if (opCode <= SUBS_RANGE) {
-			Operations.subs(binI);
+			instructions.add(new RInstruction(binI, "SUBS"));
 		} else if (opCode <= SUBIS_RANGE) {
 			Operations.subIs(binI);
 		} else if (opCode <= PRNL_RANGE) {
@@ -99,8 +100,7 @@ public class Disassembler {
 		} 
 	}
 	
-	public void disassembleInstructions() throws IOException{
-		List<Integer> binaryInstructions = Converter.BinaryToInt(fileName, false);
+	public void disassembleInstructions() throws IOException {
 		for (int curIndex = 0; curIndex < binaryInstructions.size(); curIndex++) {
 			int binI = binaryInstructions.get(curIndex);
 			long binL = (long)(binI) & 0x00000000ffffffffL;
