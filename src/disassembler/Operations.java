@@ -1,19 +1,26 @@
 package disassembler;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class Operations {
 	
-	private List<String> conditions;
+	private static ArrayList<String> conditions = new ArrayList<String>();
 	
-	private static List<String> bFormat(int parameters) {
+	
+	private List<String> bFormat(int parameters, Hashtable<Interger, String> labels) {
+		List<String> params = new ArrayList<String>();
+		int BRaddress = (parameters << 6) >> 6;
+		
+		
 		
 	}
 	
-	private static List<String> cbFormat(int parameters) {
+	private List<String> cbFormat(int parameters) {
 		
 	}
 	
-	private static List<String> rFormat(int parameters) {
+	private List<String> rFormat(int parameters) {
 		
 	}
 	
@@ -21,13 +28,31 @@ public class Operations {
 		
 	}
 	
-	
 	public static String branch(int binI) {
-		String opName = "B"; 
+		
 	}
-
+	
 	public static String branchCond(int binI) {
-		// TODO Auto-generated method stub
+		if (conditions == null) {
+			conditions.add("EQ");
+			conditions.add("NE");
+			conditions.add("HS");
+			conditions.add("LO");
+			conditions.add("MI");
+			conditions.add("PL");
+			conditions.add("VS");
+			conditions.add("VC");
+			conditions.add("HI");
+			conditions.add("LS");
+			conditions.add("GE");
+			conditions.add("LT");
+			conditions.add("GT");
+			conditions.add("LE");
+		}
+		
+		int condition = (binI << 28) >> 28;
+		String opName = "B" + condition;
+		
 		
 	}
 

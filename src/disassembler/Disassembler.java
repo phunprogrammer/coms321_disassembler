@@ -5,7 +5,7 @@ import disassembler.Operations;
 
 public class Disassembler {
 	
-	private List<Integer> instructions;
+	private String fileName;
 	
 	// CONSTANT OPCODE RANGES
 	private static final int BRANCH_RANGE = 191;
@@ -34,11 +34,8 @@ public class Disassembler {
 	private static final int DUMP_RANGE = 2046;
 	private static final int HALT_RANGE = 2047;
 	
-	
-	
-	
-	public Disassembler(List<Integer> instructions) {
-		this.instructions = instructions;
+	public Disassembler(String fileName) {
+		this.fileName = fileName;
 	}
 	
 	private void determineOp(int opCode, int binI) {
@@ -98,7 +95,7 @@ public class Disassembler {
 	}
 	
 	public void disassembleInstructions() throws IOException{
-		List<Integer> instructions = Converter.BinaryToInt("test1.txt.machine", false);
+		List<Integer> instructions = Converter.BinaryToInt(fileName, false);
 		for (int curIndex = 0; curIndex < instructions.size(); curIndex++) {
 			int binI = instructions.get(curIndex);
 			int opCode = binI >> 21;
