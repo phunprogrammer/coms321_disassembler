@@ -7,7 +7,7 @@ public class ImmInstruction extends Instruction{
 	
 	public ImmInstruction(int binary, String opName, int line) {
 		super(binary, opName, line);
-		this.opCode = binary >> 21; 
+		this.opCode = binary >> 22; 
 		Rd = (binary << 27) >> 27;
 		Rn = (binary << 22) >> 27;
 		ALUImm = (binary << 10) >> 21;
