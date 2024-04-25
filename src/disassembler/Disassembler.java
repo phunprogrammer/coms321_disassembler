@@ -1,11 +1,14 @@
 package disassembler;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import disassembler.Operations;
+import disassembler.formats.Instruction;
+import disassembler.formats.RFormat;
 
 public class Disassembler {
 	
-	private List<Integer> instructions;
+	private List<Integer> binaryInstructions;
+	private List<Instruction> instructions;
 	
 	// CONSTANT OPCODE RANGES
 	private static final int BRANCH_RANGE = 191;
@@ -37,8 +40,9 @@ public class Disassembler {
 	
 	
 	
-	public Disassembler(List<Integer> instructions) {
-		this.instructions = instructions;
+	public Disassembler(List<Integer> binaryInstructions) {
+		this.binaryInstructions = binaryInstructions;
+		instructions = new ArrayList<>();
 	}
 	
 	private void determineOp(int opCode, int binI) {
@@ -54,6 +58,7 @@ public class Disassembler {
 			Operations.and(binI);
 		} else if (opCode <= ADD_RANGE) {
 			Operations.add(binI);
+			instructions.add((Instruction)(new RFormat(binI, "ADD")));
 		} else if (opCode <= ADDI_RANGE) {
 			Operations.addI(binI);
 		} else if (opCode <= ANDI_RANGE) {
@@ -97,13 +102,18 @@ public class Disassembler {
 		} 
 	}
 	
-	public void disassembleInstructions() throws IOException{
-		List<Integer> instructions = Converter.BinaryToInt("test1.txt.machine", false);
-		for (int curIndex = 0; curIndex < instructions.size(); curIndex++) {
-			int binI = instructions.get(curIndex);
-			int opCode = binI >> 21;
-			determineOp(opCode, binI);
-					
-			}
+	public void disassembleInstructions() throws IOException {
+		for (int curIndex = 0; curIndex < binaryInstructions.size(); curIndex++) {
+			int binI = binaryInstructions.get(curIndex);
+			long binL = (long)(binI) & 0x00000000ffffffffL;
+			int opCode = (int)(binL >> 21);
+			determineOp(opCode, (int)binI);
 		}
 	}
+
+	public void PrintInstructions() {
+		for (int curIndex = 0; curIndex < instructions.size(); curIndex++) {
+			System.out.println(instructions.get(curIndex));
+		}
+	}
+}
