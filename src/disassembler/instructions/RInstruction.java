@@ -1,4 +1,4 @@
-package disassembler.formats;
+package disassembler.instructions;
 
 public class RInstruction extends Instruction {
     private int Rm;
@@ -8,12 +8,12 @@ public class RInstruction extends Instruction {
 
     public RInstruction(int binary, String name) {
         this.binary = binary;
-        opName = name;
-        opCode = binary >> 21;
-        Rm = (binary << 11) >> 27;
-        shamt = (binary << 15) >> 26;
-        Rn = (binary << 21) >> 26;
-		Rd = (binary << 26) >> 26;
+        this.opName = name;
+        this.opCode = binary >> 21;
+        this.Rm = (binary << 11) >> 27;
+        this.shamt = (binary << 15) >> 26;
+        this.Rn = (binary << 21) >> 26;
+		this.Rd = (binary << 26) >> 26;
     }
 
     @Override

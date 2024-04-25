@@ -1,4 +1,4 @@
-package disassembler.formats;
+package disassembler.instructions;
 
 public class ImmInstruction extends Instruction{
 	int Rn;
