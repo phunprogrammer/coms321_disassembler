@@ -19,6 +19,11 @@ public class RInstruction extends Instruction {
 
     @Override
     public String toString() {
-        return String.format("%s X%s, X%s, X%s", opName, Rd, Rn, Rm);
+        String out = String.format("%s X%d, X%d, X%d", opName, Rd, Rn, Rm);
+
+        if(opName.equals("BR"))
+            out = String.format("%s X%d", opName, Rn);
+
+        return out;
     }
 }
