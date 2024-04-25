@@ -27,9 +27,7 @@ public class CBInstruction extends Instruction {
     }
 
     public CBInstruction(int binary, String name, int line) {
-        this.binary = binary;
-        this.opName = name;
-        this.line = line;
+        super(binary, name, line);
 
         this.condBRAddress = (binary << 8) >> 12;
         this.Rt = (binary << 27) >> 24;

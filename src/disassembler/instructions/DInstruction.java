@@ -7,9 +7,7 @@ public class DInstruction extends Instruction{
     private int Rt;
 
     public DInstruction(int binary, String name, int line) {
-        this.binary = binary;
-        this.opName = name;
-        this.line = line;
+        super(binary, name, line);
     }
 
     public String toString() {
