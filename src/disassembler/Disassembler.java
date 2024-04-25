@@ -89,7 +89,7 @@ public class Disassembler {
 		} else if (opCode <= LSL_RANGE) {
 			Operations.lsl(binI);
 		} else if (opCode <= BRANCHREGISTER_RANGE) {
-			Operations.branchRegister(binI);
+			instructions.add(new RInstruction(binI, "BR", line));
 		} else if (opCode <= SUBS_RANGE) {
 			instructions.add(new RInstruction(binI, "SUBS", line));
 		} else if (opCode <= SUBIS_RANGE) {
