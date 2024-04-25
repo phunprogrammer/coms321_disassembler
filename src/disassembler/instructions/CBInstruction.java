@@ -34,10 +34,11 @@ public class CBInstruction extends Instruction {
     }
 
     public String toString() {
-        return String.format("%s.%s %d", opName, COND_STRINGS.get(Rt), line + condBRAddress);
-    }
+        String out = String.format("%s.%s %d", opName, COND_STRINGS.get(Rt), line + condBRAddress);
 
-    public String labelString() {
-        return String.format("%d:", line + condBRAddress);
+        if(opName.equals("CBZ") || opName.equals("CBNZ"))
+            out = String.format("%s X%d %d", opName, Rt, line + condBRAddress);
+        
+        return out;
     }
 }
