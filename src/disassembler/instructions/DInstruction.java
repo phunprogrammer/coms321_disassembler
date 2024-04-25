@@ -8,9 +8,13 @@ public class DInstruction extends Instruction{
 
     public DInstruction(int binary, String name, int line) {
         super(binary, name, line);
+        this.DTAddress = (binary << 11) >> 23;
+        this.op = (binary << 20) >> 30;
+        this.Rn = (binary << 21) >> 27;
+        this.Rt = (binary << 27) >> 27;
     }
 
     public String toString() {
-        return null;
+        return String.format("%s X%d, [X%d, #%d]", Rt, Rn, DTAddress);
     }
 }
