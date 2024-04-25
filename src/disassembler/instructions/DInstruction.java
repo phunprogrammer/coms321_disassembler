@@ -2,6 +2,7 @@ package disassembler.instructions;
 
 public class DInstruction extends Instruction{
     private int DTAddress;
+    @SuppressWarnings("unused")
     private int op;
     private int Rn;
     private int Rt;
