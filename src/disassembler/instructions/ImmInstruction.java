@@ -9,6 +9,7 @@ public class ImmInstruction extends Instruction{
 		this.opName = opName;
 		this.binary = binary;
 		this.line = line;
+		this.opCode = binary >> 21; 
 		Rd = (binary << 27) >> 27;
 		Rn = (binary << 21) >> 27;
 		ALUImm = (binary << 10) >> 21;

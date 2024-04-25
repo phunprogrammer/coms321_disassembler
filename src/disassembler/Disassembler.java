@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import disassembler.instructions.BInstruction;
 import disassembler.instructions.ImmInstruction;
 import disassembler.instructions.Instruction;
 import disassembler.instructions.RInstruction;
@@ -35,6 +36,8 @@ public class Disassembler {
 	private static final int BRANCHREGISTER_RANGE = 1712;
 	private static final int SUBS_RANGE = 1880;
 	private static final int SUBIS_RANGE = 1929;
+	private static final int STUR_RANGE = 1984;
+	private static final int LDUR_RANGE = 1986;
 	private static final int PRNL_RANGE = 2044;
 	private static final int PRNT_RANGE = 2045;
 	private static final int DUMP_RANGE = 2046;
@@ -50,7 +53,7 @@ public class Disassembler {
 	
 	private void determineOp(int opCode, int binI, int line) {
 		if (opCode <= BRANCH_RANGE) {
-			Operations.branch(binI);
+			instructions.add(new BInstruction(binI, "B", line));
 		} else if (opCode <= BRANCHCOND_RANGE) {
 			Operations.branchCond(binI);
 		} else if (opCode <= ORRI_RANGE) {
@@ -66,11 +69,11 @@ public class Disassembler {
 		} else if (opCode <= ANDI_RANGE) {
 			instructions.add(new ImmInstruction(binI, "ANDI", line));
 		} else if (opCode <= BRANCHLINK_RANGE) {
-			Operations.branchLink(binI);
+			instructions.add(new BInstruction(binI, "BL", line));
 		} else if (opCode <= MUL_RANGE) {
 			instructions.add(new RInstruction(binI, "MUL", line));
 		} else if (opCode <= ORR_RANGE) {
-			Operations.orr(binI);
+			instructions.add(new RInstruction(binI, "ORR", line));
 		} else if (opCode <= CBZ_RANGE) {
 			Operations.cbz(binI);
 		} else if (opCode <= CBNZ_RANGE) {
@@ -91,6 +94,10 @@ public class Disassembler {
 			instructions.add(new RInstruction(binI, "SUBS", line));
 		} else if (opCode <= SUBIS_RANGE) {
 			instructions.add(new ImmInstruction(binI, "SUBIS", line));
+		} else if (opCode <= STUR_RANGE) {
+			instructions.add(new DInstruction(binI, "STUR", line));
+		} else if (opCode <= LDUR_RANGE) {
+			instructions.add(new DInstruction(binI, "LDUR", line));
 		} else if (opCode <= PRNL_RANGE) {
 			Operations.prnl(binI);
 		} else if (opCode <= PRNT_RANGE) {
