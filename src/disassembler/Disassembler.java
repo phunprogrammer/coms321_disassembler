@@ -121,7 +121,7 @@ public class Disassembler {
 		}
 	}
 
-	public void PrintInstructions() {
+	public void printInstructions() {
 		for (int curIndex = 0; curIndex < instructions.size(); curIndex++) {
 			Instruction curInstruction = instructions.get(curIndex);
 			System.out.println(String.format("%d:%c %s", curInstruction.getLine(), ' ', curInstruction.toString()));
