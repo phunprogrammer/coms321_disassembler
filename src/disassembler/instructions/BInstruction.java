@@ -6,7 +6,7 @@ public class BInstruction extends Instruction{
 	
 	public BInstruction(int binary, String opName, int line) {
 		super(binary, opName, line);
-		this.opCode = binary >> 26;
+		this.opCode = binary >>> 26;
 		branchAddress = (binary << 6) >> 6;
 	}
 	
